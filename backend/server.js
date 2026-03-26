@@ -1,7 +1,7 @@
 // server.js
 const express = require("express");
 const dotenv = require("dotenv");
-
+const summarizeText = require("./example.cjs");
 const connectDB = require("./config/db");
 
 // Load environment variables
@@ -37,10 +37,11 @@ app.post("/api/summarize", async (req, res) => {
   const { text } = req.body;
 
   // AI call
+  const summarizedText = await summarizeText(text);
 
   res.status(200).json({
     message: "successfully summarized",
-    summary: "This is where AI summary will appear",
+    summary: summarizedText,
   });
 });
 

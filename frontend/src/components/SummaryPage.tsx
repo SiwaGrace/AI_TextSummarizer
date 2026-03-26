@@ -34,7 +34,7 @@ export default function Summarizer() {
 
       const data = await response.json();
 
-      setText("");
+      // setText("");
       setSummary(data.summary);
     } catch (error) {
       console.error(error);
