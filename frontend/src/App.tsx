@@ -1,7 +1,11 @@
-import React from "react";
+import SummaryPage from "./components/SummaryPage";
 
 const App = () => {
-  return <div>app</div>;
+  return (
+    <div>
+      <SummaryPage />
+    </div>
+  );
 };
 
 export default App;
