@@ -1,7 +1,7 @@
 // server.js
 const express = require("express");
 const dotenv = require("dotenv");
-const summarizeText = require("./example.cjs");
+const summarizeText = require("./example_GeminiAI.js");
 const connectDB = require("./config/db");
 
 // Load environment variables
