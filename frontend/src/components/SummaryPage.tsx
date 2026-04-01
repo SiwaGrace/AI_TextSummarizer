@@ -24,7 +24,7 @@ export default function Summarizer() {
         return;
       }
 
-      const response = await fetch("http://localhost:9000/api/summarize", {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
