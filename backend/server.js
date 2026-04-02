@@ -13,17 +13,29 @@ const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
+  "https://ai-text-summarizer-rho.vercel.app",
   process.env.FRONTEND_URL,
-];
+].filter(Boolean);
 
 // CORS
 const corsOptions = {
-  origin: allowedOrigins,
-  // credentials: true,
-  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like Postman, mobile apps)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`Blocked CORS request from: ${origin}`);
+      callback(new Error(`CORS policy: ${origin} not allowed`));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Middleware
 app.use(express.json()); // replaces body-parser
